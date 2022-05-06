@@ -37,4 +37,12 @@ public class TodoController {
     public Todo get(@PathVariable("id") Long id){
         return service.get(id);
     }
+
+    @PatchMapping("todo/{id}/completed")
+    public Todo updateIsCompleted(@PathVariable("id") Long id, @RequestBody Todo todo){
+        if(service.exist(id)){
+            return service.updateIsCompleted(id, todo);
+        }
+        throw new RuntimeException("No existe el id para actualizar");
+    }
 }
